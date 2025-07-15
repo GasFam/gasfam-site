@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GasFam™ – Africa’s First Smart Pantry</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900 font-sans">
+    <section class="bg-gradient-to-r from-yellow-100 to-orange-200 p-10 text-center flex flex-col items-center justify-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">GasFam™</h1>
+      <p class="text-xl md:text-2xl italic mb-6">Africa’s First Smart Pantry for Daily Essentials</p>
+      <p class="text-lg md:text-xl mb-8">Rice. Beans. Palm Oil. Automated for your busy life.</p>
+      <a href="#plans" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-lg shadow-xl transition-all">Subscribe Now</a>
+    </section>
+
+    <section class="py-16 px-6 md:px-20 bg-white">
+      <h2 class="text-3xl font-semibold text-center mb-12">Why GasFam™?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        <div class="p-6 bg-yellow-50 rounded-2xl shadow-md">
+          <h3 class="text-xl font-bold mb-2">🛒 Essentials Covered</h3>
+          <p>Get rice, beans, and palm oil delivered — no more market stress.</p>
+        </div>
+        <div class="p-6 bg-yellow-50 rounded-2xl shadow-md">
+          <h3 class="text-xl font-bold mb-2">🔁 Auto-Restock</h3>
+          <p>Daily, Weekly or Monthly plans. Your food refills itself.</p>
+        </div>
+        <div class="p-6 bg-yellow-50 rounded-2xl shadow-md">
+          <h3 class="text-xl font-bold mb-2">🌍 Local & Diaspora</h3>
+          <p>Send food to your loved ones from anywhere in the world.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" class="bg-orange-50 py-16 px-6 md:px-20">
+      <h2 class="text-3xl font-semibold text-center mb-12">Choose Your BisiBox™</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="p-8 bg-white shadow-md rounded-2xl flex flex-col items-center gap-4">
+          <h3 class="text-2xl font-bold">Daily Plan</h3>
+          <p class="text-center">₦2,500/day<br />5kg Rice • 2kg Beans • 2L Oil</p>
+          <button class="w-full bg-orange-500 text-white px-5 py-2 rounded-full hover:bg-orange-600" onclick="orderWhatsApp('Daily Plan')">Order on WhatsApp</button>
+          <button class="w-full border border-orange-500 text-orange-600 px-5 py-2 rounded-full hover:bg-orange-100" onclick="payWithPaystack('Daily Plan', 2500)">Paystack</button>
+        </div>
+        <div class="p-8 bg-white shadow-md rounded-2xl border-4 border-orange-400 flex flex-col items-center gap-4">
+          <h3 class="text-2xl font-bold">Weekly Plan</h3>
+          <p class="text-center">₦10,000/week<br />10kg Rice • 5kg Beans • 5L Oil</p>
+          <button class="w-full bg-orange-500 text-white px-5 py-2 rounded-full hover:bg-orange-600" onclick="orderWhatsApp('Weekly Plan')">Order on WhatsApp</button>
+          <button class="w-full border border-orange-500 text-orange-600 px-5 py-2 rounded-full hover:bg-orange-100" onclick="payWithPaystack('Weekly Plan', 10000)">Paystack</button>
+        </div>
+        <div class="p-8 bg-white shadow-md rounded-2xl flex flex-col items-center gap-4">
+          <h3 class="text-2xl font-bold">Monthly Plan</h3>
+          <p class="text-center">₦25,000/month<br />25kg Rice • 10kg Beans • 10L Oil</p>
+          <button class="w-full bg-orange-500 text-white px-5 py-2 rounded-full hover:bg-orange-600" onclick="orderWhatsApp('Monthly Plan')">Order on WhatsApp</button>
+          <button class="w-full border border-orange-500 text-orange-600 px-5 py-2 rounded-full hover:bg-orange-100" onclick="payWithPaystack('Monthly Plan', 25000)">Paystack</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-10 px-6 md:px-20 text-center">
+      <h4 class="text-xl font-semibold mb-2">GasFam™</h4>
+      <p class="mb-2">Your Busy Life. Our BisiBox™.</p>
+      <p class="text-sm">&copy; <span id="year"></span> GasFam Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.getElementById('year').innerText = new Date().getFullYear();
+      const businessPhone = '2347033332212';
+
+      function orderWhatsApp(plan) {
+        const message = encodeURIComponent(`Hello GasFam! I want to subscribe to the ${plan}. My details:`);
+        window.open(`https://wa.me/${businessPhone}?text=${message}`, '_blank');
+      }
+
+      function payWithPaystack(plan, amount) {
+        const handler = PaystackPop.setup({
+          key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx',
+          email: 'customer@example.com',
+          amount: amount * 100,
+          currency: 'NGN',
+          ref: `${plan.replace(/\s+/g, '')}-${Date.now()}`,
+          metadata: {
+            custom_fields: [
+              {
+                display_name: 'Plan',
+                variable_name: 'subscription_plan',
+                value: plan
+              }
+            ]
+          },
+          callback: function(response) {
+            alert('Payment complete! Reference: ' + response.reference);
+          },
+          onClose: function() {
+            alert('Payment window closed');
+          }
+        });
+        handler.openIframe();
+      }
+    </script>
+  </body>
+</html>
