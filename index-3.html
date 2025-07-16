@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GasFam Spin & Win 2.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .wheel {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 12px solid #00ffcc;
+      margin: 2rem auto;
+      background: conic-gradient(
+        #39ff14 0deg 60deg,
+        #ff6f61 60deg 120deg,
+        #f9a602 120deg 180deg,
+        #007fff 180deg 240deg,
+        #ff00ff 240deg 300deg,
+        #ffffff 300deg 360deg
+      );
+      position: relative;
+      transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 0 40px #00ffcc, inset 0 0 20px #00ffcc;
+    }
+    .pointer {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 35px solid #00ffcc;
+      margin: 0 auto;
+    }
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-size: 22px;
+      font-weight: bold;
+      color: #f9f9f9;
+    }
+    .home-button {
+      margin-top: 25px;
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Welcome to GasFam™ Spin & Win</h1>
+  <p>Sign up and spin daily to unlock real rewards! 🎁</p>
+
+  <div class="pointer"></div>
+  <div class="wheel" id="wheel"></div>
+
+  <button id="spinButton" onclick="spinWheel()">Spin Now</button>
+  <div id="result"></div>
+
+  <a href="https://gasfam-site.vercel.app" class="home-button">🏠 Back to Home</a>
+
+  <script>
+    const prizes = [
+      "₦500 Off Your Next Order",
+      "Free Delivery!",
+      "Double Beans in Next BisiBox",
+      "5 BisiPoints Credited",
+      "Surprise Bonus Item",
+      "Better Luck Tomorrow 😅"
+    ];
+
+    let hasSpun = false;
+
+    function spinWheel() {
+      if (!localStorage.getItem('signedIn')) {
+        alert("Please sign in to spin the wheel.");
+        return;
+      }
+      if (hasSpun) {
+        alert("You can only spin once per day. Come back tomorrow!");
+        return;
+      }
+
+      const wheel = document.getElementById("wheel");
+      const result = document.getElementById("result");
+      const degree = Math.floor(3600 + Math.random() * 360);
+      wheel.style.transform = `rotate(${degree}deg)`;
+
+      setTimeout(() => {
+        const index = Math.floor(((degree % 360) / 60));
+        const prize = prizes[index];
+        result.innerHTML = `🎁 You won: <br>${prize}<br><br>
+          <small style='color: #ccc'>*To redeem, your order must be at least 2× this prize value. Prize valid for 1 year.</small><br><br>
+          <a href='https://wa.me/2347033332212?text=Hello%20GasFam!%20I%20just%20won:%20${encodeURIComponent(prize)}' target='_blank'>
+            <button style='margin-top:10px;'>Redeem on WhatsApp</button>
+          </a>`;
+        hasSpun = true;
+        document.getElementById("spinButton").disabled = true;
+      }, 4000);
+    }
+
+    // Simulated sign-in for now (demo purpose)
+    localStorage.setItem('signedIn', 'true');
+  </script>
+
+</body>
+</html>
