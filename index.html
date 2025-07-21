@@ -1,104 +1,138 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GasFam Homepage</title>
+  <title>GasFam Spin & Pantry</title>
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff8f0;
-      overflow: hidden;
-    }.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  box-sizing: border-box;
-  background: url('https://i.imgur.com/3BaX8sU.png') no-repeat center/cover; /* Spin background */
-}
+      padding: 0;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
 
-.top-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 16px;
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+    }
 
-.top-buttons button,
-.action-buttons button,
-.pantry-buttons button {
-  background: #ff7e5f;
-  border: none;
-  color: white;
-  padding: 10px 16px;
-  margin: 5px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  flex: 1;
-}
+    .container {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
 
-.reward-progress {
-  width: 90%;
-  height: 20px;
-  background: #ddd;
-  border-radius: 10px;
-  margin-top: 10px;
-  overflow: hidden;
-}
+    .buttons-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-.progress-bar {
-  height: 100%;
-  background: #28a745;
-  width: 45%; /* example user score */
-}
+    .button {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      min-width: 120px;
+      text-align: center;
+    }
 
-.progress-label {
-  font-size: 14px;
-  margin-top: 5px;
-  color: #333;
-}
+    .wheel {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 8px solid #004aad;
+      background: conic-gradient(
+        #ffe600 0% 25%, 
+        #ff7b00 25% 50%, 
+        #00c2ff 50% 75%, 
+        #8bc34a 75% 100%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-.action-buttons,
-.pantry-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+    .wheel-text {
+      position: absolute;
+      font-size: 16px;
+      text-align: center;
+      width: 100%;
+      pointer-events: none;
+    }
 
-h2 {
-  margin: 10px 0 5px;
-  color: #222;
-}
+    .spin-button {
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 2;
+    }
 
+    footer {
+      position: absolute;
+      bottom: 12px;
+      font-size: 12px;
+      color: #888;
+    }
   </style>
-</head><body>
-  <div class="container"><div class="top-buttons">
-  <button>Build My Box</button>
-  <button>My Virtual Card</button>
-</div>
+</head>
+<body>
 
-<div class="reward-progress">
-  <div class="progress-bar"></div>
-</div>
-<div class="progress-label">My Reward Progress (45/100)</div>
+<header>GasFam - Africa’s Smart Pantry</header>
 
-<div class="action-buttons">
-  <button>Pay Bill</button>
-  <button>Flash Sales</button>
-  <button>Transfer Wallet</button>
-</div>
+<div class="container">
+  <div class="buttons-row">
+    <button class="button">Build My Box</button>
+    <button class="button">My Virtual Card</button>
+  </div>
 
-<div>
-  <h2>My Pantry Plan</h2>
-  <div class="pantry-buttons">
-    <button>Stream</button>
-    <button>My Rewards</button>
-    <button>Invite Friends</button>
+  <div class="buttons-row">
+    <button class="button">My Pantry Plan</button>
+    <button class="button">My Rewards</button>
+    <button class="button">Invite Friends</button>
+  </div>
+
+  <div class="buttons-row">
+    <button class="button">Pay Bill</button>
+    <button class="button">Flash Sales</button>
+    <button class="button">Transfer Wallet</button>
+  </div>
+
+  <div class="wheel">
+    <button class="spin-button">SPIN</button>
+    <div class="wheel-text">SPIN & WIN</div>
   </div>
 </div>
 
-  </div>
-</body></html>
+<footer>© 2025 GasFam. All rights reserved.</footer>
+
+</body>
+</html>
