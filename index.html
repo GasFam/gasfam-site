@@ -1,138 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GasFam Spin & Pantry</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GasFam App</title>
+<style>
+  /* Reset and base styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
+  body {
+    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+    background-color: #ffe89d;
+    color: #333;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* prevent scrolling */
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+    justify-content: space-between; /* distribute space evenly */
+  }
+
+  /* Top section styling */
+  .top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Profile / Wallet info */
+  .profile-info {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  /* Spin wheel placeholder */
+  .spin-container {
+    width: 250px;
+    height: 250px;
+    margin: 10px 0;
+    border-radius: 50%;
+    background: conic-gradient(#f9c74f, #90be6d, #f94144, #577590, #f9c74f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* Button styles */
+  .btn {
+    background-color: #2b7a78;
+    color: #fff;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 90%;
+    max-width: 250px;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #3aafa9;
+  }
+
+  /* Reward progress bar container */
+  .reward-progress {
+    width: 90%;
+    max-width: 250px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+
+  /* Inner fill for progress */
+  .reward-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #00bfa5;
+    transition: width 1s;
+  }
+
+  /* Bottom navigation / options section */
+  .bottom-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Button group for options */
+  .section {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive adjustments for small screens */
+  @media(max-height: 700px){
     body {
-      margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
+      overflow: hidden;
     }
-
-    header {
-      background-color: #004aad;
-      color: white;
-      padding: 16px;
-      width: 100%;
-      text-align: center;
-      font-size: 22px;
-    }
-
-    .container {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .buttons-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .button {
-      background-color: #004aad;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-size: 14px;
-      cursor: pointer;
-      min-width: 120px;
-      text-align: center;
-    }
-
-    .wheel {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 8px solid #004aad;
-      background: conic-gradient(
-        #ffe600 0% 25%, 
-        #ff7b00 25% 50%, 
-        #00c2ff 50% 75%, 
-        #8bc34a 75% 100%
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .wheel-text {
-      position: absolute;
-      font-size: 16px;
-      text-align: center;
-      width: 100%;
-      pointer-events: none;
-    }
-
-    .spin-button {
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    footer {
-      position: absolute;
-      bottom: 12px;
-      font-size: 12px;
-      color: #888;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-<header>GasFam - Africa’s Smart Pantry</header>
-
 <div class="container">
-  <div class="buttons-row">
-    <button class="button">Build My Box</button>
-    <button class="button">My Virtual Card</button>
-  </div>
-
-  <div class="buttons-row">
-    <button class="button">My Pantry Plan</button>
-    <button class="button">My Rewards</button>
-    <button class="button">Invite Friends</button>
-  </div>
-
-  <div class="buttons-row">
-    <button class="button">Pay Bill</button>
-    <button class="button">Flash Sales</button>
-    <button class="button">Transfer Wallet</button>
-  </div>
-
-  <div class="wheel">
-    <button class="spin-button">SPIN</button>
-    <div class="wheel-text">SPIN & WIN</div>
+  <!-- Main Top Section -->
+  <div class="top-section">
+    <!-- Wallet Info -->
+    <div class="profile-info">
+      <p>Wallet Balance: N5,000</p>
+    </div>
+    
+    <!-- Spin Wheel Placeholder -->
+    <div class="spin-container" id="spinWheel">
+      <div style="color:#fff; font-weight:bold;">Spin Wheel</div>
+    </div>
+    
+    <!-- Replace "Spin the Win" button with "My Virtual Card" -->
+    <button class="btn" id="myVirtualCardBtn">My Virtual Card</button>
+    
+    <!-- Reward Progress Bar -->
+    <div style="width:90%; max-width:250px; margin-top:10px;">
+      <h4 style="margin-bottom:5px;">My Reward Progress</h4>
+      <div class="reward-progress">
+        <div class="reward-fill" id="rewardFill"></div>
+      </div>
+      <p style="font-size:12px;text-align:center;" id="progressText">0 / 100</p>
+    </div>
+    
+    <!-- Action Buttons: Pay Bill, Flash Sales, Transfer Wallet -->
+    <div class="section" style="margin-top:10px;">
+      <button class="btn" id="payBillBtn">Pay Bill</button>
+      <button class="btn" id="flashSalesBtn">Flash Sales</button>
+      <button class="btn" id="transferWalletBtn">Transfer Wallet</button>
+    </div>
+    
+    <!-- My Pantry Plan Button -->
+    <button class="btn" id="myPantryPlanBtn" style="margin-top:15px; width:90%;">My Pantry Plan</button>
+    
+    <!-- Options Buttons: Stream, My Rewards, Invite Friends -->
+    <div class="section" style="margin-top:10px;">
+      <button class="btn" id="streamBtn">Stream</button>
+      <button class="btn" id="rewardsBtn">My Rewards</button>
+      <button class="btn" id="inviteBtn">Invite Friends</button>
+    </div>
   </div>
 </div>
 
-<footer>© 2025 GasFam. All rights reserved.</footer>
+<script>
+  // Animate reward progress (simulate progress of 75 for demo)
+  let progress = 75; // User's reward progress
+  const rewardFill = document.getElementById('rewardFill');
+  const progressText = document.getElementById('progressText');
+
+  function setProgress(value) {
+    rewardFill.style.width = value + '%';
+    progressText.textContent = value + ' / 100';
+  }
+
+  setProgress(progress);
+
+  // Button Event Listeners
+  document.getElementById('myVirtualCardBtn').addEventListener('click', () => {
+    alert('My Virtual Card clicked!');
+  });
+
+  document.getElementById('payBillBtn').addEventListener('click', () => {
+    alert('Pay Bill clicked!');
+  });
+
+  document.getElementById('flashSalesBtn').addEventListener('click', () => {
+    alert('Flash Sales clicked!');
+  });
+
+  document.getElementById('transferWalletBtn').addEventListener('click', () => {
+    alert('Transfer Wallet clicked!');
+  });
+
+  document.getElementById('myPantryPlanBtn').addEventListener('click', () => {
+    alert('My Pantry Plan clicked! \nOptions: Stream, My Rewards, Invite Friends');
+  });
+
+  document.getElementById('streamBtn').addEventListener('click', () => {
+    alert('Stream clicked!');
+  });
+
+  document.getElementById('rewardsBtn').addEventListener('click', () => {
+    alert('My Rewards clicked!');
+  });
+
+  document.getElementById('inviteBtn').addEventListener('click', () => {
+    alert('Invite Friends clicked!');
+  });
+
+  // Spin Wheel click placeholder
+  document.getElementById('spinWheel').addEventListener('click', () => {
+    alert('Spin Wheel clicked!');
+  });
+</script>
 
 </body>
 </html>
